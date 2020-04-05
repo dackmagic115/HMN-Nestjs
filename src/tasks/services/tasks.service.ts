@@ -9,7 +9,7 @@ export interface ITask {
   status: TaskStatus;
 }
 
-enum TaskStatus {
+export enum TaskStatus {
   OPEN = 'OPEN',
   IN_PROGRESS = 'IN_PROGRESS',
   DONE = 'DONE',
@@ -42,5 +42,11 @@ export class TasksService {
   deleteTask(id: string): string {
     this.tasks = this.tasks.filter(r => r.id !== id);
     return 'success';
+  }
+
+  updateTaskStatus(id: string, status: TaskStatus) {
+    const task = this.getTaskById(id);
+    task.status = status;
+    return task;
   }
 }
