@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import * as uuid from 'uuid/v1';
+import { CreateTaskDTO } from '../dto/task.dto';
 
-interface ITask {
+export interface ITask {
   id: string;
   title: string;
   description: string;
@@ -22,7 +23,8 @@ export class TasksService {
     return this.tasks;
   }
 
-  createTask(title: string, description: string): ITask {
+  createTask(CreateTaskDto: CreateTaskDTO): ITask {
+    const { title, description } = CreateTaskDto;
     const task: ITask = {
       id: uuid(),
       title,
