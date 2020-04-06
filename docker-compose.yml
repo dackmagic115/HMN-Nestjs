@@ -1,5 +1,21 @@
 version: "3"
 services:
+  api:
+    container_name: task-api
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    environment:
+      NODE_ENV: developement
+    depends_on:
+      - db
+    ports:
+      - "3000:8080"
+    volumes:
+      - ./src:/usr/app/src
+      - /usr/app/node_modules
+      - ./start.sh:/usr/app/start.sh
+      - ./development.env:/usr/app/development.env
   db:
     container_name: task-db
     build:
