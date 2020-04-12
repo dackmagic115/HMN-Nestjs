@@ -3,18 +3,18 @@ import { TaskStatus } from '../entities/task.entity';
 
 export class CreateTaskDTO {
   @IsNotEmpty()
-  title: string;
+  title!: string;
 
   @IsNotEmpty()
-  description: string;
+  description!: string;
 }
 
 // tslint:disable-next-line: max-classes-per-file
 export class FilterDTO {
   @IsOptional()
   @IsEnum(TaskStatus)
-  status: TaskStatus;
+  status!: TaskStatus;
 
   @IsOptional()
-  search: string;
+  search!: string;
 }

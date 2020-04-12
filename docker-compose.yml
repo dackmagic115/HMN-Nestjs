@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   api:
     container_name: task-api
@@ -10,9 +10,9 @@ services:
     depends_on:
       - db
     ports:
-      - "3000:8080"
+      - '3000:8080'
     volumes:
-      - ./src:/usr/app/src
+      - ./src:/usr/app/src:rw,cached
       - /usr/app/node_modules
       - ./start.sh:/usr/app/start.sh
       - ./development.env:/usr/app/development.env
@@ -36,7 +36,7 @@ services:
     depends_on:
       - db
     ports:
-      - "8001:80"
+      - '8001:80'
 volumes:
   postgres:
   pgadmin:
