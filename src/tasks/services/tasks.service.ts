@@ -1,19 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import * as uuid from 'uuid/v1';
 import { CreateTaskDTO, FilterDTO } from '../dto/task.dto';
-
-export interface ITask {
-  id: string;
-  title: string;
-  description: string;
-  status: TaskStatus;
-}
-
-export enum TaskStatus {
-  OPEN = 'OPEN',
-  IN_PROGRESS = 'IN_PROGRESS',
-  DONE = 'DONE',
-}
+import { ITask, TaskStatus } from '../entities/task.entity';
 
 @Injectable()
 export class TasksService {
