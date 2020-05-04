@@ -14,8 +14,7 @@ RUN npm install
 
 COPY . .
 
-RUN chmod +x start.sh
 
 EXPOSE 8080
 
-ENTRYPOINT ["/bin/bash", "start.sh"]
+CMD ["npm", "run", "start"]
