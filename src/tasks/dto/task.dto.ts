@@ -7,6 +7,10 @@ export class CreateTaskDTO {
 
   @IsNotEmpty()
   description!: string;
+
+  @IsOptional()
+  @IsEnum(TaskStatus)
+  status!: TaskStatus;
 }
 
 // tslint:disable-next-line: max-classes-per-file

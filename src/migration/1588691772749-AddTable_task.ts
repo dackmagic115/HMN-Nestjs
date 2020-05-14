@@ -10,6 +10,7 @@ export class AddTableTask1588691772749 implements MigrationInterface {
             name: 'id',
             type: 'int',
             isPrimary: true,
+            isGenerated: true,
           },
           {
             name: 'title',

@@ -7,6 +7,7 @@ import {
   Delete,
   Patch,
   Query,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { TasksService } from '../services/tasks.service';
 import { CreateTaskDTO, FilterDTO } from '../dto/task.dto';
@@ -23,13 +24,13 @@ export class TasksController {
   //     return this.service.getAllTasks();
   //   }
 
-  //   @Post()
-  //   createTask(@Body() dto: CreateTaskDTO): ITask {
-  //     return this.service.createTask(dto);
-  //   }
+  @Post()
+  createTask(@Body() dto: CreateTaskDTO) {
+    return this.service.insertEntry(dto);
+  }
 
   @Get(':id')
-  getTaskById(@Param('id') id: string) {
+  getTaskById(@Param('id', ParseIntPipe) id: string) {
     return this.service.getTaskById(id);
   }
 

@@ -8,7 +8,7 @@ services:
     environment:
       NODE_ENV: developement
     env_file:
-    - development.env
+      - development.env
     depends_on:
       - db
     ports:
@@ -26,9 +26,9 @@ services:
     environment:
       POSTGRES_PASSWORD: postgres
     env_file:
-    - development.env
+      - development.env
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - ./postgres-data:/var/lib/postgresql
     ports:
       - 54321:5432
   pgadmin:

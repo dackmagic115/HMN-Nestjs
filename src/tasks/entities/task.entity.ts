@@ -1,7 +1,6 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-export interface ITask {
-  id: string;
+export interface taskProp {
   title: string;
   description: string;
   status: TaskStatus;
@@ -14,7 +13,7 @@ export enum TaskStatus {
 }
 
 @Entity('task')
-export class Task extends BaseEntity {
+export class Task extends BaseEntity implements taskProp {
   @PrimaryGeneratedColumn()
   id!: number;
 
