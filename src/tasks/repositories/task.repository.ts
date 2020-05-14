@@ -7,4 +7,8 @@ export class TaskRepository extends Repository<Task> {
     const entry = this.create(props);
     return this.save(entry);
   }
+
+  async deleteEntry(id: number) {
+    return this.delete(id);
+  }
 }

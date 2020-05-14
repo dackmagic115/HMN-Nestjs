@@ -1,11 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateTaskDTO, FilterDTO } from '../dto/task.dto';
 import { Task, taskProp } from '../entities/task.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TaskRepository } from '../repositories/task.repository';
 
 interface ITask {
   insertEntry(props: taskProp): Promise<Task>;
+  getTaskById(id: number): Promise<Task>;
+  deleteEntry(id: number);
 }
 
 @Injectable()
@@ -21,7 +22,7 @@ export class TasksService implements ITask {
     return entry;
   }
 
-  async getTaskById(id: string): Promise<Task> {
+  async getTaskById(id: number): Promise<Task> {
     const found = await this.repo.findOne(id);
 
     if (!found) {
@@ -29,5 +30,9 @@ export class TasksService implements ITask {
     }
 
     return found;
+  }
+
+  async deleteEntry(id: number) {
+    return this.repo.deleteEntry(id);
   }
 }
