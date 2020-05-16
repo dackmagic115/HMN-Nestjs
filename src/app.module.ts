@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TaskModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './tasks/entities/task.entity';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { Task } from './tasks/entities/task.entity';
       logging: ['error', 'schema', 'warn'],
     }),
     TaskModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
