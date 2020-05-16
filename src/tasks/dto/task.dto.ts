@@ -13,7 +13,6 @@ export class CreateTaskDTO {
   status!: TaskStatus;
 }
 
-// tslint:disable-next-line: max-classes-per-file
 export class FilterDTO {
   @IsOptional()
   @IsEnum(TaskStatus)
