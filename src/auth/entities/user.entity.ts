@@ -1,12 +1,12 @@
 import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-export interface userProps {
+export interface UserProps {
   username: string;
   password: string;
 }
 
-@Entity()
-export class User extends BaseEntity implements userProps {
+@Entity('user')
+export class User extends BaseEntity implements UserProps {
   @PrimaryGeneratedColumn()
   id!: number;
 
