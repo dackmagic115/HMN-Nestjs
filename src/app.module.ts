@@ -5,6 +5,7 @@ import { TaskModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Task } from './tasks/entities/task.entity';
 import { AuthModule } from './auth/auth.module';
+import { User } from './auth/entities/user.entity';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AuthModule } from './auth/auth.module';
       entities: [
         // __dirname + '/../**/*.entity.ts'
         Task,
+        User,
       ],
       logging: ['error', 'schema', 'warn'],
     }),
