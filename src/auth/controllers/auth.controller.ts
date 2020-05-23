@@ -10,4 +10,9 @@ export class AuthController {
   async signup(@Body() dto: AuthDTO) {
     return this.service.insertEntry(dto);
   }
+
+  @Post('signIn')
+  async signIn(@Body() dto: AuthDTO) {
+    return this.service.authCreadential(dto);
+  }
 }
