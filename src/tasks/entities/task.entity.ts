@@ -1,9 +1,17 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+} from 'typeorm';
+import { User } from 'src/auth/entities/user.entity';
 
 export interface taskProp {
   title: string;
   description: string;
   status: TaskStatus;
+  userId: number;
 }
 
 export enum TaskStatus {
@@ -25,4 +33,14 @@ export class Task extends BaseEntity implements taskProp {
 
   @Column()
   status!: TaskStatus;
+
+  @Column()
+  userId!: number;
+
+  @ManyToOne(
+    type => User,
+    user => user.tasks,
+    { eager: false },
+  )
+  user?: User;
 }

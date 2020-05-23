@@ -1,4 +1,12 @@
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+} from 'typeorm';
+import { Task } from 'src/tasks/entities/task.entity';
 
 export interface UserProps {
   username: string;
@@ -15,4 +23,11 @@ export class User extends BaseEntity implements UserProps {
 
   @Column()
   password!: string;
+
+  @OneToMany(
+    type => Task,
+    task => task.user,
+    { eager: true },
+  )
+  tasks?: Task[];
 }

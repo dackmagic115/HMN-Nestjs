@@ -13,8 +13,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { TasksService } from '../services/tasks.service';
-import { CreateTaskDTO, FilterDTO } from '../dto/task.dto';
+import { CreateTaskDTO, FilterDTO, UpdateTaskDTO } from '../dto/task.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from 'src/auth/entities/user.entity';
 
 @Controller('tasks')
 export class TasksController {
@@ -28,8 +30,8 @@ export class TasksController {
 
   @Post()
   @UseGuards(AuthGuard())
-  createTask(@Body() dto: CreateTaskDTO) {
-    return this.service.insertEntry(dto);
+  createTask(@GetUser() user: User, @Body() dto: CreateTaskDTO) {
+    return this.service.insertEntry({ ...dto, userId: user.id });
   }
 
   @Get(':id')
@@ -40,7 +42,11 @@ export class TasksController {
 
   @Put(':id')
   @UseGuards(AuthGuard())
-  update(@Body() dto: CreateTaskDTO, @Param('id', ParseIntPipe) id: number) {
+  update(
+    @GetUser() user: User,
+    @Body() dto: UpdateTaskDTO,
+    @Param('id', ParseIntPipe) id: number,
+  ) {
     return this.service.updateEntry(id, dto);
   }
 

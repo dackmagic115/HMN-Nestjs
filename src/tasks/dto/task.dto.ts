@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsOptional, IsEnum } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsEnum, IsInt } from 'class-validator';
 import { TaskStatus } from '../entities/task.entity';
 
 export class CreateTaskDTO {
@@ -11,6 +11,22 @@ export class CreateTaskDTO {
   @IsOptional()
   @IsEnum(TaskStatus)
   status!: TaskStatus;
+}
+
+export class UpdateTaskDTO {
+  @IsNotEmpty()
+  title!: string;
+
+  @IsNotEmpty()
+  description!: string;
+
+  @IsOptional()
+  @IsEnum(TaskStatus)
+  status!: TaskStatus;
+
+  @IsNotEmpty()
+  @IsInt()
+  userId!: number;
 }
 
 export class FilterDTO {
