@@ -1,5 +1,5 @@
 import { Controller, Injectable, Post, Body } from '@nestjs/common';
-import { AuthService } from '../services/auth.service';
+import { AuthService, TokenPayload } from '../services/auth.service';
 import { AuthDTO } from '../dto/auth.dto';
 
 @Controller('auth')
@@ -12,7 +12,7 @@ export class AuthController {
   }
 
   @Post('signIn')
-  async signIn(@Body() dto: AuthDTO) {
+  async signIn(@Body() dto: AuthDTO): Promise<TokenPayload | null> {
     return this.service.authCreadential(dto);
   }
 }
