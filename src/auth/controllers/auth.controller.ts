@@ -1,6 +1,14 @@
-import { Controller, Injectable, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Injectable,
+  Post,
+  Body,
+  UseGuards,
+  Req,
+} from '@nestjs/common';
 import { AuthService, TokenPayload } from '../services/auth.service';
 import { AuthDTO } from '../dto/auth.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('auth')
 export class AuthController {
@@ -14,5 +22,11 @@ export class AuthController {
   @Post('signIn')
   async signIn(@Body() dto: AuthDTO): Promise<TokenPayload | null> {
     return this.service.authCreadential(dto);
+  }
+
+  @Post('/testGuard')
+  @UseGuards(AuthGuard())
+  test(@Req() req) {
+    return { id: req.user.id };
   }
 }
