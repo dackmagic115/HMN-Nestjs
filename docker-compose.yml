@@ -1,0 +1,47 @@
+version: '3'
+services:
+  api:
+    container_name: task-api
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    environment:
+      NODE_ENV: developement
+    env_file:
+      - development.env
+    depends_on:
+      - db
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./src:/usr/app/src:rw,cached
+      - /usr/app/node_modules
+      - ./start.sh:/usr/app/start.sh
+      - ./development.env:/usr/app/development.env
+  db:
+    container_name: task-db
+    build:
+      context: .
+      dockerfile: db.Dockerfile
+    environment:
+      POSTGRES_PASSWORD: postgres
+    env_file:
+      - development.env
+    volumes:
+      - ./postgres-data:/var/lib/postgresql
+    ports:
+      - 54321:5432
+  pgadmin:
+    container_name: task-pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - db
+    ports:
+      - '8001:80'
+volumes:
+  postgres-data:
+    external: true
+  pgadmin:
